@@ -4,14 +4,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ResultController {
-    private final ServiceCalculator serviceCalculator;
-    public ResultController(ServiceCalculator serviceCalculator) {
-        this.serviceCalculator = serviceCalculator;
+    private final CalculatorService calculatorService;
+    public ResultController(CalculatorServiceImpl calculatorService) {
+        this.calculatorService = calculatorService;
     }
 
     @GetMapping("/calculator")
     public String welcomeMessage() {
-        return serviceCalculator.welcomeMessage();
+        return calculatorService.welcomeMessage();
     }
 
     @GetMapping("/calculator/sum")
@@ -23,18 +23,18 @@ public class ResultController {
         } else if(num2 == null) {
             return "Параметр " + "num2" + "  не задан, повторите ввод и обновите страницу";
         } else
-            return num1 + " + " + num2 + " = " + serviceCalculator.sum(num1, num2);
+            return num1 + " + " + num2 + " = " + calculatorService.sum(num1, num2);
     }
     // http://localhost:8080/calculator/sum?num1=2&num2=2   после метода разделитель ? а вместо запятой между параметрами &
 
     @GetMapping("/calculator/minus")
     public String minus(@RequestParam("num1") Integer num1, @RequestParam("num2") Integer num2){
-        return num1 + " - " + num2 + " = " + serviceCalculator.minus(num1,num2);
+        return num1 + " - " + num2 + " = " + calculatorService.minus(num1,num2);
     }
 
     @GetMapping("/calculator/multiply")
     public String multiply(@RequestParam("num1") Integer num1, @RequestParam("num2") Integer num2){
-        return num1 + " * " + num2 + " = " + serviceCalculator.multiply(num1,num2);
+        return num1 + " * " + num2 + " = " + calculatorService.multiply(num1,num2);
     }
 
     @RequestMapping(path = "/calculator/divide", method = RequestMethod.GET)
@@ -42,8 +42,8 @@ public class ResultController {
         if(num2 == 0) {
             return "Деление на 0 запрещено!";
         } else
-            return num1 + " / " + num2 + " = " + serviceCalculator.divide(num1,num2);
+            return num1 + " / " + num2 + " = " + calculatorService.divide(num1,num2);
     }
-    // можно просто записать      public String divide(int num1, int num2) - без аннотации @RequestParam, так как имя параметра не хочу менять
+    // можно просто записать      public String divide(int num1, int num2) - без аннотации @RequestParam, так как имя параметра для пользователя сейчас не меняю
 
 }

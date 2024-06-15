@@ -3,7 +3,7 @@ package pro.sky.sky.pro.CalculatorBazhina;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServiceCalculator {
+public class CalculatorServiceImpl implements CalculatorService {
 
     public String welcomeMessage() {
         return "<b>Добро пожаловать в калькулятор</b>";
@@ -12,16 +12,18 @@ public class ServiceCalculator {
     public Integer sum(int num1, int num2){
         return num1 + num2;
     }
+
     public Integer minus(int num1, int num2){
         return num1 - num2;
     }
+
     public Integer multiply(int num1, int num2){
         return num1 * num2;
     }
+
     public Integer divide(int num1, int num2){
         return num1 / num2;
     }
-
 }
  /*  Написать 5 методов, которые при вызове из браузера делают следующее:
 1. Метод по адресу /calculator должен вернуть приветствие “Добро пожаловать в калькулятор".
